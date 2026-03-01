@@ -1,0 +1,1666 @@
+@charset "UTF-8";
+/* ======================================
+   Reset 
+====================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+/* ======================================
+   Base style
+====================================== */
+body {
+  font-family:
+    "游ゴシック", YuGothic, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",
+    "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", "Lato", sans-serif;
+  line-height: 1.6;
+  color: #333;
+  -webkit-font-smoothing: antialiased;
+}
+a {
+  text-decoration: none;
+  color: #333;
+}
+img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: bottom;
+}
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+h1,
+h2 {
+  font-family: "Lato", sans-serif;
+}
+/* ======================================
+  ヘッダー
+====================================== */
+.header {
+  width: 100%;
+  background-color: #ffffff;
+}
+.header__inner {
+  display: flex;
+  margin: 0 36px;
+}
+/* レスポンシブ固定 */
+@media (max-width: 1080px) {
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+  }
+}
+/* ======================================
+  ヘッダーロゴ
+====================================== */
+.header__logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+.header__logo img {
+  height: 20px;
+  width: auto;
+  display: block;
+}
+/* ======================================
+  ヘッダーナビ
+====================================== */
+.header__nav {
+  margin-left: auto;
+}
+.header__navlist {
+  display: flex;
+}
+.header__navitem {
+  margin-left: 45px;
+}
+.header__navlink {
+  font-size: 10px;
+  height: 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-weight: bold;
+  transition: all 0.2s;
+}
+.header__navlink span {
+  display: block;
+  text-align: center;
+}
+.header__navlink:hover {
+  opacity: 0.3;
+}
+/* ======================================
+  ヘッダーボタン
+====================================== */
+.header__actions {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.header__cta {
+  display: inline-block;
+  background-color: #f79214;
+  font-size: 11px;
+  font-weight: bold;
+  color: aliceblue;
+  padding: 11px 20px;
+  border-radius: 20px;
+  transition: all 0.2s;
+}
+.header__cta:hover {
+  opacity: 0.7;
+}
+/* ======================================
+  ヘッダーハンバーガー
+====================================== */
+.menu-toggle,
+.header__hamburger,
+.hamburger__nav {
+  display: none;
+}
+/* レスポンシブ切り替え */
+@media (max-width: 1080px) {
+  /* 非表示 */
+  .header__nav,
+  .header__actions {
+    display: none;
+  }
+  .header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  /* ３本線表示 */
+  .menu-toggle {
+    display: none;
+  }
+  .header__hamburger {
+    display: block;
+    width: 27px;
+    z-index: 900;
+    cursor: pointer;
+  }
+  .hamburger__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 20px;
+    margin: 25px 0;
+    position: relative;
+  }
+  .hamburger__line {
+    display: block;
+    height: 2px;
+    background: #a2a2a4;
+    width: 100%;
+    border-radius: 4px;
+    position: absolute;
+  }
+  .hamburger__line:nth-child(1) {
+    top: 0;
+  }
+
+  .hamburger__line:nth-child(2) {
+    top: 9px;
+  }
+
+  .hamburger__line:nth-child(3) {
+    bottom: 0;
+  }
+  /* 変形 */
+  .hamburger__line {
+    transition: all 0.3s ease;
+  }
+  .menu-toggle:checked + .header__hamburger .hamburger__line:nth-child(1) {
+    top: 9px;
+    transform: rotate(45deg);
+  }
+
+  .menu-toggle:checked + .header__hamburger .hamburger__line:nth-child(2) {
+    opacity: 0;
+  }
+
+  .menu-toggle:checked + .header__hamburger .hamburger__line:nth-child(3) {
+    bottom: auto;
+    top: 9px;
+    transform: rotate(-45deg);
+  }
+  /* ナビゲーション */
+  .hamburger__nav {
+    display: block;
+    position: fixed;
+    top: 70px;
+    left: 0;
+
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 900;
+
+    /* ← 画面外へ */
+    transform: translateX(100%);
+    transition: transform 0.4s ease;
+  }
+  .menu-toggle:checked ~ .hamburger__nav {
+    transform: translateX(0);
+  }
+  .hamburger__navlist {
+    text-align: center;
+    padding: 20px 0;
+  }
+  .hamburger__navlink {
+    color: #fff;
+    font-weight: bold;
+    letter-spacing: 5px;
+    font-family: "Lato", sans-serif;
+    display: block;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+  }
+  .hamburger__navlink span:last-child {
+    color: #f79214;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin-top: 10px;
+  }
+  .hamburger__btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px auto 0;
+    width: 260px;
+    height: 60px;
+    border-radius: 38px;
+
+    background-color: #f79214;
+    color: #fff;
+    transition: all 0.3s;
+  }
+  .hamburger__btn:hover {
+    opacity: 0.6;
+  }
+  .hamburger__btn span:first-child {
+    font-size: 16px;
+    font-weight: bold;
+  }
+}
+@media (max-width: 768px) {
+  .header {
+    padding: 16px;
+  }
+  .header__inner {
+    margin: 0;
+  }
+  .hamburger__container {
+    margin: 5px 0;
+  }
+}
+/* ======================================
+  section
+====================================== */
+section {
+  background-color: #c9d4de26;
+}
+/* ======================================
+  メインビジュアル画像
+====================================== */
+.hero {
+  width: 100%;
+  height: 700px;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.hero__bg-triangle--lt {
+  position: absolute;
+  left: 0;
+  width: 280px;
+}
+.hero__bg-triangle--rb {
+  position: absolute;
+  right: 0;
+  bottom: 10%;
+}
+.hero__bg-line {
+  position: absolute;
+  top: 85px;
+  left: -70px;
+  z-index: 7;
+}
+.hero__image {
+  position: absolute;
+  top: -80px;
+  right: 0;
+  width: min(100%, 775px);
+}
+/* ======================================
+  メインビジュアルコピー
+====================================== */
+.hero__inner {
+  display: flex;
+  align-items: center;
+  max-width: 1040px;
+  margin: 0 auto;
+  height: 100%;
+}
+.hero__content {
+  z-index: 11;
+  width: fit-content;
+  position: relative;
+}
+.hero__copy {
+  font-family: sans-serif;
+  margin: 0;
+  font-size: 2.6rem;
+  margin-bottom: 16px;
+}
+.hero__cta {
+  display: inline-block;
+  align-items: center;
+  text-align: center;
+
+  background-color: #f79214;
+  font-size: 15px;
+  padding: 18px 0;
+  margin-bottom: 16px;
+  color: aliceblue;
+  font-weight: bold;
+  width: 100%;
+  border-radius: 40px;
+  transition: all 0.2s;
+}
+.hero__cta:hover {
+  opacity: 0.7;
+}
+.hero__caption {
+  margin: 0 auto;
+  font-size: 11.5px;
+}
+/* ======================================
+  メインビジュアルバッジ
+====================================== */
+.hero__badge {
+  position: absolute;
+  top: -100px;
+  z-index: 12;
+}
+
+/* レスポンシブ */
+@media (max-width: 1080px) {
+  .hero {
+    margin-top: 70px;
+  }
+  .hero__inner {
+    padding: 0 36px;
+  }
+}
+@media (max-width: 768px) {
+  .hero__bg-triangle--lt,
+  .hero__bg-triangle--rb,
+  .hero__bg-line {
+    display: none;
+  }
+  .hero {
+    height: 600px;
+  }
+  .hero__image {
+    margin-top: 70px;
+    margin-bottom: 7px;
+  }
+
+  .hero__inner {
+    padding: 0 16px 70px;
+    width: 100%;
+    align-items: flex-end;
+  }
+
+  .hero__copy {
+    font-size: 22px;
+  }
+  .hero__badge {
+    width: 102px;
+    height: 102px;
+    top: -10px;
+  }
+}
+/* ======================================
+  共通 タイトル
+====================================== */
+.container {
+  max-width: 1070px;
+  margin: 0 auto;
+}
+
+.section__title {
+  text-align: center;
+  margin: 0;
+  font-size: 2.3rem;
+  font-weight: 700;
+  position: relative;
+}
+.section__title br {
+  display: none;
+}
+.section__header::after {
+  content: ""; /*擬似要素を生成する*/
+  display: block; /*サイズを持たせる*/
+  width: 45px;
+  height: 6px;
+  background-color: #f79214;
+  margin: 20px auto 60px;
+}
+/* レスポンシブ */
+@media (max-width: 1080px) {
+  .container {
+    padding: 0 36px;
+  }
+}
+@media (max-width: 768px) {
+  .container {
+    padding: 0 16px;
+  }
+  .section__title {
+    font-size: 25px;
+    text-align: center;
+  }
+  .section__title br {
+    display: block;
+  }
+}
+/* ======================================
+  学習環境
+====================================== */
+.features {
+  padding: 0 0 60px;
+}
+/* ======================================
+  学習環境カード
+====================================== */
+.features__list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.features-card {
+  background-color: #d4dce2b3;
+  padding: 30px 20px;
+}
+.featuers-card__item {
+  display: flex;
+  justify-content: center;
+}
+.featuers-card__item img {
+  border-radius: 50%;
+  width: 200px;
+  /* max-width: 200px; */
+}
+.features-card__caption {
+  text-align: center;
+  margin: 20px 0;
+  font-size: 18px;
+}
+@media (max-width: 768px) {
+  .features__list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .features-card {
+    max-width: 350px;
+    padding: 46px 0;
+    width: 100%;
+  }
+  .features-card__caption {
+    margin: 16px 0 0;
+  }
+}
+/* ======================================
+  AIシステム
+====================================== */
+.ai-system {
+  padding: 60px 0;
+  margin-bottom: 60px;
+}
+/* ======================================
+  AIシステムグリッド
+====================================== */
+.ai-system__content {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+/* ======================================
+  AIシステム左画像
+====================================== */
+.ai-system__media {
+  position: relative;
+  min-height: 400px;
+}
+.ai-system__bg img {
+  position: absolute;
+  top: -30px;
+}
+.ai-system__panel {
+  position: absolute;
+  width: 90%;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease;
+}
+/* ======================================
+  AIシステム右テキスト
+====================================== */
+.ai-system__tab {
+  width: 100%;
+  padding: 20px;
+  margin-bottom: 10px;
+  border-radius: 20px;
+  opacity: 0.4;
+  transition: 0.3s;
+  cursor: pointer;
+}
+.ai-system__title {
+  margin: 0 0 8px;
+  font-size: 25px;
+}
+.ai-system__sp {
+  display: none;
+}
+.ai-system__text {
+  margin: 0;
+  font-size: 14px;
+}
+/* ======================================
+  AIシステムホバー
+====================================== */
+.ai-system__tab:hover {
+  background-color: #eee;
+  opacity: 1;
+}
+.ai-system__tab.is-active {
+  background-color: #eee;
+  opacity: 1;
+  color: #333;
+}
+.ai-system__panel.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+/* レスポンシブ */
+@media (max-width: 768px) {
+  .ai-system__inner {
+    max-width: 414px;
+  }
+  .ai-system__media {
+    display: none;
+  }
+  .ai-system__sp {
+    display: block;
+  }
+  .ai-system__content {
+    display: flex;
+    flex-direction: column;
+  }
+  .ai-system__tab {
+    opacity: 1;
+  }
+}
+/* ======================================
+  求人
+====================================== */
+.partners {
+  padding: 60px 0;
+}
+.section__description {
+  text-align: center;
+  margin-bottom: 40px;
+}
+/* ======================================
+  求人画像
+====================================== */
+.partners__main {
+  display: flex;
+  background-color: #fff;
+  border-radius: 10px;
+  margin-bottom: 40px;
+  box-shadow: 5px 20px 50px rgba(0, 0, 0, 0.08);
+}
+.partners__logos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 34px;
+  flex: 4;
+  padding: 54px 60px;
+  border-right: #9d9c9c4e solid 1px;
+}
+/* ======================================
+  求人メリット
+====================================== */
+.partners__benefits {
+  text-align: center;
+  padding: 24px 40px;
+  width: 242px;
+}
+.partners__benefits-title {
+  font-size: 18px;
+  line-height: 26px;
+  margin-top: 0;
+}
+.partners__benefit {
+  margin-bottom: 32px;
+}
+.partners__benefit-number {
+  font-size: 14px;
+  font-weight: bold;
+  width: 27px;
+  height: 27px;
+  background-color: #dedede;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 8px;
+}
+.partners__benefit p {
+  font-size: 14px;
+  line-height: 18px;
+  margin: 0;
+}
+/* ======================================
+  求人インタビュー
+====================================== */
+.partners__voice {
+  display: flex;
+  gap: 20px;
+}
+.voice-card {
+  flex: 1;
+  background: #e9eaed;
+  padding: 24px;
+  border-radius: 12px;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+.voice-card__profile {
+  text-align: center;
+  height: 160px;
+}
+.voice-card__image {
+  width: 160px;
+  margin: 0;
+}
+.voice-card__image img {
+  width: 100px;
+}
+.voice-card__meta {
+  font-size: 12px;
+}
+.voice-card__textsp {
+  display: none;
+}
+.voice-card__badge {
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+  background-color: #f79214;
+  padding: 7px;
+  border-radius: 20px;
+}
+.voice-card__company {
+  background-color: black;
+}
+.voice-card__title {
+  margin: 8px 0;
+  font-size: 18px;
+}
+.voice-card__text {
+  margin: 0;
+  font-size: 12px;
+}
+@media (max-width: 768px) {
+  .partners__inner {
+    max-width: 414px;
+    width: 100%;
+  }
+  .partners__logos {
+    padding: 16px;
+    grid-template-columns: 1fr 1fr;
+    gap: 23px;
+    border-right: none;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  .partners__logo:nth-child(9),
+  .partners__logo:nth-child(10),
+  .partners__logo:nth-child(11),
+  .partners__logo:nth-child(12) {
+    display: none;
+  }
+
+  .partners__main {
+    display: flex;
+    flex-direction: column;
+  }
+  .partners__benefits {
+    padding: 16px;
+    width: 100%;
+  }
+  .partners__benefits-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .partners__benefit {
+    margin: 0;
+  }
+  .partners__voice {
+    display: flex;
+    flex-direction: column;
+  }
+  .voice-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .voice-card__profile {
+    order: 2;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .voice-card__content {
+    text-align: center;
+    order: 1;
+  }
+  .voice-card__text {
+    display: none;
+  }
+  .voice-card__textsp {
+    text-align: left;
+    display: block;
+    font-size: 12px;
+    margin: 0;
+  }
+}
+
+/* ======================================
+  サポート
+====================================== */
+.support {
+  padding: 60px 0;
+}
+/* ======================================
+  サポートカード
+====================================== */
+.support__cards {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+.support__card {
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 5px 20px 50px rgba(0, 0, 0, 0.08);
+  background-color: #fff;
+}
+.support__title {
+  text-align: center;
+  color: #eee;
+  background-color: #333;
+  font-weight: normal;
+  font-size: 21px;
+  margin: 0;
+  padding: 15px;
+}
+.support__body {
+  display: flex;
+  gap: 8px;
+  padding: 20px 35px;
+}
+.support__list {
+  flex: 1;
+  padding-left: 16px;
+}
+.support__item {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 8px;
+
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding-left: 1.2rem;
+}
+.support__item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  background: #ccc;
+  border-radius: 50%;
+}
+.support__caption {
+  margin: 0;
+  font-size: 12px;
+}
+.support__satisfaction {
+  width: 104px;
+  height: 104px;
+  background-color: #f79214;
+  border-radius: 50%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.support__label {
+  margin: 0;
+  color: white;
+  font-weight: bold;
+}
+.support__data {
+  margin: 0;
+  font-size: 32px;
+  line-height: 32px;
+  color: white;
+  font-weight: bold;
+  display: inline-flex;
+  align-items: flex-end;
+}
+.support__data-percent {
+  font-size: 25px;
+}
+@media (max-width: 768px) {
+  .support__cards {
+    display: flex;
+    flex-direction: column;
+    max-width: 414px;
+    margin: 0 auto 30px;
+  }
+  .support__body {
+    padding: 8px;
+  }
+  .support__satisfaction {
+    width: 75px;
+    height: 75px;
+  }
+  .support__label {
+    font-size: 12px;
+  }
+  .support__data {
+    font-size: 28px;
+  }
+  .support__data-percent {
+    font-size: 16px;
+  }
+}
+/* ======================================
+  サポートレビュー
+====================================== */
+.support__review {
+  border-radius: 20px;
+  background-color: #e9eaed;
+}
+.review__item {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  padding: 23px 40px;
+}
+.review__profile {
+}
+.review__role {
+  margin: 0;
+  text-align: center;
+  font-size: 14px;
+}
+.review__content {
+}
+.review__question {
+  margin: 0 0 8px;
+  font-size: 25px;
+}
+.review__answer {
+  margin: 0;
+  font-size: 14px;
+}
+@media (max-width: 768px) {
+  .support__review {
+    max-width: 414px;
+    margin: 0 auto;
+  }
+  .review__item {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+  }
+  .review__profile img {
+    width: 90px;
+  }
+  .review__question {
+    font-size: 18px;
+    order: -1; /* 一番上へ */
+  }
+}
+/* ======================================
+  ブログ
+====================================== */
+.blog {
+  padding-top: 60px;
+  margin-bottom: 60px;
+}
+.section__subtitle {
+  text-align: center;
+}
+.blog__list {
+  display: flex;
+  gap: 20px;
+}
+.blog__image {
+  border-radius: 10px;
+  overflow: hidden;
+}
+.blog__image img {
+  width: 100%;
+  transition: transform 0.4s ease;
+}
+.blog__image img:hover {
+  transform: scale(1.1);
+}
+.blog__title {
+  font-size: 18px;
+  font-weight: 700;
+}
+/* レスポンシブ */
+@media (max-width: 768px) {
+  .blog__list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .blog__item {
+    max-width: 441px;
+    width: 100%;
+  }
+}
+/* ======================================
+  メッセージ
+====================================== */
+.message {
+  padding: 0 0 60px;
+  background-color: #fff;
+}
+.message__inner {
+}
+.message__wrapper {
+  display: flex;
+  align-items: center;
+  padding: 35px;
+  gap: 52px;
+  background-color: #e9eaed;
+  border-radius: 10px;
+}
+.message__image {
+  flex: 1;
+}
+.message__body {
+  flex: 1.5;
+}
+.message__title {
+  font-family: "Lato", sans-serif;
+  font-size: 38px;
+  margin: 0 0 20px;
+}
+.message__text {
+}
+.message__name {
+}
+@media (max-width: 768px) {
+  .message__wrapper {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 38px;
+  }
+  .message__image {
+    max-width: 441px;
+  }
+}
+/* ======================================
+  料金
+====================================== */
+.price {
+  padding: 60px 0;
+  background-color: #d5d8dc4e;
+}
+/* ======================================
+  Railsコース
+====================================== */
+.price-course {
+  display: flex;
+  gap: 30px;
+  padding: 45px;
+  background-color: #fff;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+.price-course__name {
+  flex: 1;
+  padding: 24px 0;
+  border: 4px solid transparent;
+  background:
+    linear-gradient(#fff, #fff) padding-box,
+    linear-gradient(90deg, #f79214, #f73a14) border-box;
+}
+.price-course__title {
+  font-size: 24px;
+  text-align: center;
+  margin: 0;
+  line-height: 32px;
+}
+.price-course__content {
+  flex: 2.5;
+}
+.price-course__heading {
+  font-size: 22px;
+  color: #f79214;
+  margin: 0 0 20px;
+}
+.price-course__row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.price-course__row dt {
+  padding: 10px 18px;
+  font-size: 13px;
+  border-radius: 20px;
+  color: white;
+  background: linear-gradient(90deg, #212121, #444);
+  line-height: 1;
+}
+.price-course__row dd {
+  font-size: 18px;
+  font-weight: bold;
+  margin-left: 15px;
+}
+.price-course__link {
+  font-size: 14px;
+  color: #9999;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  margin: 0;
+
+  display: flex;
+  align-items: center;
+  line-height: 1;
+  justify-content: end;
+}
+.price-course__link::after {
+  content: "";
+  background: url("https://camp.potepan.com/wp-content/themes/potepancamp/assets/images/common/chevron-right.svg")
+    no-repeat center / contain;
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+.price-course__link:hover {
+  color: #f79214;
+}
+@media (max-width: 768px) {
+  .price-course {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+  }
+  .price-course__name {
+    width: 100%;
+  }
+  .price-course__content {
+    width: 100%;
+  }
+}
+/* ======================================
+  補助金
+====================================== */
+.subsidy {
+  padding: 20px;
+  background-color: #fff;
+}
+.subsidy__title {
+  font-size: 21px;
+  font-weight: 700;
+  padding: 8px;
+  margin: 0 0 24px;
+  color: #fff;
+  text-align: center;
+  background-color: #08af77;
+}
+/* ======================================
+  補助金概要
+====================================== */
+.subsidy__overview {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+.subsidy__logo {
+  width: 248px;
+  height: 100%;
+}
+.subsidy__description {
+}
+.subsidy__text {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0 0 8px;
+}
+.subsidy__caption {
+  font-size: 14px;
+  text-align: center;
+  padding: 8px 16px;
+  margin: 0;
+  border: 1px solid #d7d9dbdd;
+}
+@media (max-width: 768px) {
+  .subsidy__overview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+/* ======================================
+  補助金料金
+====================================== */
+.subsidy-price {
+  background-color: #fcfaf5;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+.subsidy-price__container {
+  max-width: 613px;
+  margin: 0 auto;
+}
+.subsidy-price__title {
+  font-size: 21px;
+  text-align: center;
+  margin: 0 0 16px;
+}
+.subsidy-price__images {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 0 14px;
+}
+.subsidy-price__max {
+  font-size: 25px;
+  font-weight: bold;
+  color: #08af77;
+  text-align: center;
+  position: relative;
+  margin: 0 0 16px;
+  padding: 8px;
+  line-height: 32px;
+
+  border-top: 1px solid #08af77;
+  border-bottom: 1px solid #08af77;
+}
+.subsidy-price__max span {
+  font-size: 12px;
+  position: absolute;
+  top: 6px;
+  margin-left: 4px;
+}
+.subsidy-price__text {
+  margin: 0 0 16px;
+}
+.subsidy-price__caption {
+  font-size: 12px;
+  margin: 0;
+}
+@media (max-width: 768px) {
+  .subsidy-price__images {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-items: center;
+    gap: 8px;
+  }
+}
+/* ======================================
+  補助金要件
+====================================== */
+.subsidy-condition {
+  padding: 20px;
+  background-color: #f4f5f7;
+}
+.subsidy-condition__container {
+  max-width: 613px;
+  margin: 0 auto;
+}
+.subsidy-condition__title {
+  font-size: 21px;
+  text-align: center;
+  margin: 0 0 16px;
+}
+.subsidy-condition__list {
+  margin-bottom: 16px;
+}
+.subsidy-condition__item {
+  display: flex;
+}
+.subsidy-condition__marker {
+}
+.subsidy-condition__text {
+  margin: 0 8px 0 0;
+}
+.subsidy-condition__tool {
+  flex-shrink: 0;
+}
+.subsidy-condition__tool img {
+  display: block;
+}
+.subsidy-condition__caption {
+  margin: 0;
+  font-size: 12px;
+}
+/* ======================================
+  補助金要件吹き出し
+====================================== */
+.subsidy-condition__tool {
+  position: relative;
+  cursor: pointer;
+}
+.subsidy-condition__tip {
+  /* 透明・隠す */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s;
+
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 150%;
+
+  font-size: 10px;
+  color: #fff;
+  background-color: #333;
+  border-radius: 4px;
+  width: max-content;
+  padding: 5px;
+}
+.subsidy-condition__tip::before {
+  /* 三角 */
+  content: "";
+  width: 0;
+  height: 0;
+  border-top: 10px solid #333;
+  border-right: 10px solid transparent;
+  border-left: 10px solid transparent;
+
+  position: absolute;
+  left: 50%;
+  bottom: -10px;
+  transform: translateX(-50%);
+}
+
+.subsidy-condition__tool:hover .subsidy-condition__tip {
+  opacity: 0.9;
+  visibility: visible;
+}
+/* ======================================
+  無料カウンセリングボタン
+====================================== */
+.counseling__btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 60px auto 0;
+  width: 300px;
+  height: 64px;
+  border-radius: 38px;
+
+  background-color: #f79214;
+  color: #fff;
+  transition: all 0.3s;
+}
+.counseling__btn:hover {
+  opacity: 0.8;
+}
+.counseling__btn span:first-child {
+  font-family: "Lato", sans-serif;
+  font-size: 21px;
+  font-weight: 600;
+  line-height: 32px;
+}
+.counseling__btn span:last-child {
+  font-size: 12px;
+}
+
+/* ======================================
+  比較
+====================================== */
+.comparison {
+  padding: 60px 0;
+}
+.comparison__scroll {
+  display: none;
+}
+/* ======================================
+  比較表
+====================================== */
+.comparison-table {
+  position: relative;
+  height: 1032px;
+  width: 900px;
+  margin: 0 auto 60px;
+}
+.comparison-table__inner {
+  border-radius: 10px;
+  box-shadow: 5px 20px 20px rgba(0, 0, 0, 0.05);
+  height: 1032px;
+  width: 900px;
+  overflow: hidden;
+  position: relative;
+}
+table {
+  border-collapse: collapse;
+}
+.comparison-table__inner tr:first-of-type {
+  height: 60px;
+}
+.comparison-table__company {
+  font-size: 21px;
+}
+.comparison-table__inner tr {
+  height: 108px;
+}
+.comparison-table__inner tr th {
+  line-height: 26px;
+}
+.comparison-table__data {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 4px;
+  line-height: 18px;
+}
+
+/* 項目 */
+.comparison-table__inner th:nth-child(1) {
+  width: 22.5%;
+}
+
+/* POTEPAN列 */
+.comparison-table__inner th:nth-child(2),
+.comparison-table__inner td:nth-child(2) {
+  width: 30%;
+}
+/* A社・B社 */
+.comparison-table__inner th:nth-child(3),
+.comparison-table__inner td:nth-child(3),
+.comparison-table__inner th:nth-child(4),
+.comparison-table__inner td:nth-child(4) {
+  width: 22.5%;
+}
+.comparison-table__inner tr:nth-child(odd) {
+  background-color: #f3f0eb;
+}
+
+.table__logo {
+  width: 166px;
+}
+.table__icon {
+  height: 30px;
+  width: 30px;
+}
+.comparison-table__point {
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 26px;
+}
+.comparison-table__price {
+  font-size: 25px;
+  font-weight: bold;
+}
+.comparison-table__tax {
+  font-size: 16px;
+}
+.table__border {
+  border: 4px solid #f79214;
+  width: 276px;
+  height: 100%;
+  border-radius: 10px;
+  position: absolute;
+  top: 0;
+  left: 208px;
+}
+/* レスポンシブ　スクロールバー */
+@media (max-width: 1080px) {
+  .comparison-table {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+/* ======================================
+  その他コース
+====================================== */
+.other {
+  padding: 60px 0 120px;
+}
+.other-course {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(2, 1fr);
+}
+.other-course__body {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  box-shadow: 5px 20px 20px rgba(0, 0, 0, 0.05);
+}
+.other-course__image {
+  width: 100%;
+  height: auto;
+}
+.other-course__overview {
+  width: 100%;
+  padding: 0 24px;
+}
+.other-course__title {
+  font-size: 25px;
+  margin: 0 0 16px;
+}
+.other-course__text {
+  font-size: 14px;
+  font-weight: bold;
+  margin: 0 0 16px;
+}
+/* レスポンシブ 縦積み*/
+@media (max-width: 1080px) {
+  .other-course {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+  .other-course__content {
+    width: 500px;
+  }
+  .other-course__body {
+    display: flex;
+    flex-direction: column;
+  }
+  .other-course__image {
+    width: 500px;
+    height: 100%;
+  }
+  .other-course__overview {
+    padding: 35px 24px;
+    text-align: left;
+  }
+  /* スクロール */
+  .comparison__scroll {
+    display: block;
+    font-size: 14px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  .scroll__image {
+    width: 18px;
+    height: 18px;
+    margin-left: 8px;
+  }
+}
+@media (max-width: 768px) {
+  .other-course__content {
+    max-width: 350px;
+  }
+}
+/* ======================================
+  その他　詳しくはこちら
+====================================== */
+.other-course__link {
+  font-size: 14px;
+  font-weight: bold;
+  color: #9999;
+
+  transition: all 0.3s ease;
+  margin: 0;
+
+  display: flex;
+  align-items: center;
+  line-height: 1;
+}
+.other-course__link::after {
+  content: "";
+  background: url("https://camp.potepan.com/wp-content/themes/potepancamp/assets/images/common/chevron-right.svg")
+    no-repeat center / contain;
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+.other-course__link:hover {
+  color: #f79214;
+}
+/* ======================================
+  フッター
+====================================== */
+.footer {
+  padding: 80px 0 40px;
+  background-color: #f79214;
+}
+.footer__inner {
+  margin: 0 auto;
+  max-width: 1040px;
+  display: flex;
+  justify-content: space-between;
+  color: #fff;
+}
+/* ======================================
+  会社・住所・sns
+====================================== */
+.footer__info {
+  margin-right: 40px;
+  flex: 0 0 40%;
+}
+.footer__logo {
+  width: 70%;
+  display: inline-block;
+}
+.footer__company {
+  margin: 15px 0 0;
+  font-weight: bold;
+}
+.footer__address {
+  margin: 35px 0 0;
+  font-weight: bold;
+}
+.footer__sns {
+  display: flex;
+  margin: 35px 0;
+}
+.footer__icon {
+  margin-right: 20px;
+}
+.footer__icon img {
+  width: 60px;
+}
+/* ======================================
+  右下アイコン
+====================================== */
+.subsidy__footer {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
+.subsidy__footer img {
+  max-width: 375px;
+}
+@media (max-width: 428px) {
+  .subsidy__footer {
+    background-color: #f4f5f7;
+    width: 100%;
+    left: 0;
+    text-align: center;
+  }
+  .subsidy__footer img {
+    width: 100%;
+  }
+}
+/* ======================================
+  コースアクセス
+====================================== */
+.footer__center {
+  margin-right: 20px;
+}
+.footer__item {
+  margin-bottom: 30px;
+}
+.footer__item p {
+  margin: 0;
+  font-size: 12px;
+}
+.footer__item a {
+  font-size: 18px;
+  font-weight: bold;
+  display: inline-block;
+  color: #fff;
+}
+.footer__media {
+}
+.footer__character {
+  display: block;
+  margin: 80px 0 0 auto;
+  width: 152px;
+}
+@media (max-width: 768px) {
+  .footer__list,
+  .footer__center {
+    display: none;
+  }
+  .footer {
+    padding: 40px 0;
+  }
+  .footer__inner {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center;  */
+    text-align: center;
+  }
+  .footer__info {
+    margin: 0;
+    padding-top: 30px;
+    width: 100%;
+  }
+  .footer__logo {
+    width: 280px;
+  }
+  .footer__company {
+    margin: 30px 0 0;
+  }
+  .footer__sns {
+    display: flex;
+    justify-content: center;
+  }
+  .footer__media {
+    order: -1; /* ← 最初へ */
+    display: flex;
+    justify-content: center;
+  }
+  .footer__character {
+    margin: 0 auto;
+  }
+}
