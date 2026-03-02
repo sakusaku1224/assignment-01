@@ -586,6 +586,7 @@ section {
   }
   .ai-system__tab {
     opacity: 1;
+    background-color: #eee;
   }
 }
 /* ======================================
