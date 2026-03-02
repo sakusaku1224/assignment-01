@@ -895,7 +895,8 @@ section {
   align-items: center;
   padding: 23px 40px;
 }
-.review__profile {
+.review__question-sp {
+  display: none;
 }
 .review__role {
   margin: 0;
@@ -926,8 +927,11 @@ section {
     width: 90px;
   }
   .review__question {
+    display: none;
+  }
+  .review__question-sp {
+    display: block;
     font-size: 18px;
-    order: -1; /* 一番上へ */
   }
 }
 /* ======================================
