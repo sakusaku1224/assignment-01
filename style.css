@@ -385,6 +385,7 @@ section {
   }
   .hero {
     height: 600px;
+    margin-top: 62px;
   }
   .hero__image {
     margin-top: 70px;
